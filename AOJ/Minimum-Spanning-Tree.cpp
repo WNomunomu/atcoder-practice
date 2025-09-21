@@ -18,6 +18,10 @@ int prim(vector<vector<int>>& G, int n) {
         }
       }
     }
+
+    if (u == -1) {
+      break;
+    }
     
     isVisited[u] = true;
     totalWeight += minCost[u];
@@ -38,7 +42,7 @@ int main() {
   int n;
   cin >> n;
 
-  vector<vector<int>> G(n);
+  vector<vector<int>> G(n, vector<int>(n));
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
