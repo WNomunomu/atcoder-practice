@@ -2,6 +2,8 @@
 #include <climits>
 using namespace std;
 
+static const int NIL = -1;
+
 int prim(vector<vector<int>>& G, int n) {
   vector<bool> isVisited(n, false);
   vector<int> minCost(n, INT_MAX);
@@ -10,16 +12,16 @@ int prim(vector<vector<int>>& G, int n) {
   int totalWeight = 0;
 
   for (int i = 0; i < n; i++) {
-    int u = -1;
+    int u = NIL;
     for (int j = 0; j < n; j++) {
       if (!isVisited[j]) { 
-        if (u == -1 || minCost[j] < minCost[u]) {
+        if (u == NIL || minCost[j] < minCost[u]) {
           u = j;
         }
       }
     }
 
-    if (u == -1) {
+    if (u == NIL) {
       break;
     }
     
@@ -28,7 +30,7 @@ int prim(vector<vector<int>>& G, int n) {
 
     for (int v = 0; v < n; v++) {
       if (!isVisited[v]) {
-        if (G[u][v] != -1 && G[u][v] < minCost[v]) {
+        if (G[u][v] != NIL && G[u][v] < minCost[v]) {
           minCost[v] = G[u][v];
         }
       }
