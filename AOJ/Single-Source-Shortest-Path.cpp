@@ -13,7 +13,6 @@ struct Edge {
 
 void dijkstra(vector<vector<Edge>>& graph, int start, vector<int>& dist) {
   int n = graph.size();
-  dist.assign(n, INT_MAX);
   priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
   dist[start] = 0;
@@ -26,10 +25,10 @@ void dijkstra(vector<vector<Edge>>& graph, int start, vector<int>& dist) {
 
     if (cost > dist[v]) continue;
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < graph[v].size(); i++) {
       Edge& e = graph[v][i];
       if (dist[v] + e.cost < dist[e.to]) {
-        dist[e.to] = dist[v] = e.cost;
+        dist[e.to] = dist[v] + e.cost;
         pq.push(make_pair(dist[e.to], e.to));
       }
     }
@@ -53,7 +52,7 @@ int main() {
     }
   }
 
-  vector<int> dist;
+  vector<int> dist(n, INT_MAX);
   dijkstra(graph, 0, dist);
 
   for (int i = 0; i < n; i++) {
