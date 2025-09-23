@@ -7,28 +7,20 @@ int main() {
   string s;
   cin >> s;
 
-  bool isAlternated = true;
-  char prev = s[0];
-  int count = 0;
+  long count1 = 0;
+  long count2 = 0;
 
-  while (isAlternated) {
-    bool isContinuous = false;
-
-    for (int i = 1; i < s.length(); i++) {
-      char cur = s[i];
-      if (prev == cur) {
-        isContinuous = true;
-      }
-      if (isContinuous && prev != cur) {
-        char temp = prev;
-        s[i - 1] = cur;
-        s[i] = temp;
-        isAlternated = true;
-      }
-      prev = s[i];
+  int counter = 0;
+  for (int i = 0; i < n + n; i++) {
+    if (s[i] == 'A') {
+      count1 += abs(i - 2 * counter);
+      count2 += abs(i - (2 * counter + 1));
+      counter++;
     }
-     
   }
+
+  cout << min(count1, count2) << endl;
 
   return 0;
 }
+
